@@ -1,32 +1,50 @@
-# Python Blog CMS (Backend)
+# CVS Blogs - Backend API
 
-This is the backend repository for the Phase 3 Blog/CMS project. It introduces JWT Authentication and Database Migrations to the Python stack.
+A pure REST JSON API built with FastAPI, SQLAlchemy, and Neon PostgreSQL. It handles authentication (JWT), data persistence, and core business logic for the CVS Blogs application.
 
 ## Tech Stack
-- **Framework:** FastAPI
-- **Database:** PostgreSQL
-- **ORM:** SQLAlchemy
-- **Migrations:** Alembic
-- **Authentication:** passlib (bcrypt) + python-jose (JWT)
-- **Deployment:** Vercel (via `vercel.json`)
+- **FastAPI**: A modern, fast web framework for building APIs with Python.
+- **SQLAlchemy**: The Python SQL toolkit and Object Relational Mapper (ORM).
+- **Neon PostgreSQL**: A serverless Postgres database.
+- **JWT (JSON Web Tokens)**: Used for secure, stateless authentication.
 
-## How to Run Locally
+## Prerequisites
+- Python 3.9+
+- A Neon PostgreSQL database URL (or any local Postgres).
 
-1. Create a PostgreSQL database and paste the connection string in your `.env` file (or just let the fallback SQLite database generate automatically for local testing!).
-2. Activate your environment:
+## Setup Instructions
+
+1. Create and activate a virtual environment:
    ```bash
-   python3 -m venv venv
+   python -m venv venv
    source venv/bin/activate
    ```
-3. Install dependencies:
+2. Install dependencies:
    ```bash
-   pip install -r requirements.txt
+   pip install fastapi uvicorn sqlalchemy psycopg2-binary passlib[bcrypt] python-jose pydantic[email]
    ```
-4. Run migrations to create tables:
+3. Configure your `.env` file:
+   ```env
+   DATABASE_URL=postgresql://<user>:<password>@<host>/<dbname>
+   ```
+4. Run database migrations:
    ```bash
    alembic upgrade head
    ```
-5. Start the server:
+5. Run the backend server (runs on `http://127.0.0.1:8000`):
    ```bash
    uvicorn main:app --reload
    ```
+
+## Features
+- **Authentication**: JWT-based authentication for admin users.
+- **Database**: PostgreSQL integration with SQLAlchemy ORM.
+- **Migrations**: Alembic for database schema versioning.
+- **SEO-Friendly URLs**: Automatically generates unique URL slugs for blog posts.
+
+
+## Database Seeding
+To populate the database with an initial admin user and tags:
+```bash
+python ../scratch/seed.py
+```
