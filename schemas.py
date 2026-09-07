@@ -31,6 +31,7 @@ class TagCountResponse(BaseModel):
 class PostCreate(BaseModel):
     title: str
     content: str
+    content_type: str = "markdown"
     tags: List[str] = [] # Optional list of tag names
 
 class PostResponse(BaseModel):
@@ -38,6 +39,8 @@ class PostResponse(BaseModel):
     title: str
     slug: str | None = None
     content: str
+    content_type: str
+    views: int
     author_id: int
     tags: List[TagResponse] = []
 
@@ -47,7 +50,15 @@ class PostResponse(BaseModel):
 class PostUpdate(BaseModel):
     title: str | None = None
     content: str | None = None
+    content_type: str | None = None
     tags: List[str] | None = None
+
+class PostPaginatedResponse(BaseModel):
+    items: List[PostResponse]
+    total: int
+    page: int
+    size: int
+    pages: int
 
 # --- TOKENS ---
 class Token(BaseModel):

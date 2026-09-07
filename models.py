@@ -38,6 +38,8 @@ class Post(Base):
     title = Column(String, index=True)
     slug = Column(String, unique=True, index=True)
     content = Column(String)
+    content_type = Column(String, default="markdown")
+    views = Column(Integer, default=0)
     
     # Foreign key linking back to the User who created it
     author_id = Column(Integer, ForeignKey("users.id"))
