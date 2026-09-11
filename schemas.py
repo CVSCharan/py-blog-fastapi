@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
-from typing import List
+from typing import List, Optional
+from datetime import datetime
 
 # --- USERS ---
 class PasswordUpdate(BaseModel):
@@ -33,6 +34,7 @@ class PostCreate(BaseModel):
     content: str
     content_type: str = "markdown"
     tags: List[str] = [] # Optional list of tag names
+    published_at: Optional[datetime] = None
 
 class PostResponse(BaseModel):
     id: int
@@ -41,6 +43,7 @@ class PostResponse(BaseModel):
     content: str
     content_type: str
     views: int
+    published_at: datetime
     author_id: int
     tags: List[TagResponse] = []
 
@@ -52,6 +55,7 @@ class PostUpdate(BaseModel):
     content: str | None = None
     content_type: str | None = None
     tags: List[str] | None = None
+    published_at: Optional[datetime] = None
 
 class PostPaginatedResponse(BaseModel):
     items: List[PostResponse]

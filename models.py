@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Boolean
+from sqlalchemy import Column, Integer, String, ForeignKey, Boolean, DateTime
+from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -40,6 +41,7 @@ class Post(Base):
     content = Column(String)
     content_type = Column(String, default="markdown")
     views = Column(Integer, default=0)
+    published_at = Column(DateTime(timezone=True), server_default=func.now())
     
     # Foreign key linking back to the User who created it
     author_id = Column(Integer, ForeignKey("users.id"))
