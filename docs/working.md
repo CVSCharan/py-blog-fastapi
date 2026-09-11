@@ -14,6 +14,6 @@
 
 3. **Database (`models.py` & `schemas.py`)**
    - Defines relationships between Users, Posts, and Tags.
-   - Automatically tracks page `views`.
+   - Automatically tracks page `views` and uses `published_at` to handle publication dates.
    - Slugs are automatically generated upon post creation, ensuring unique, URL-friendly identifiers.
    - Pydantic models strictly validate incoming data and define outgoing response structures.
